@@ -141,15 +141,37 @@ export default function Page () {
   }
 
   const downloadCertificate = () => {
+    console.log("Download certificate function called");
     if (certificateRef.current) {
-      html2canvas(certificateRef.current).then((canvas) => {
-        const link = document.createElement('a')
-        link.download = 'usercentrics-app-sdk-certificate.png'
-        link.href = canvas.toDataURL()
-        link.click()
-      })
+      console.log("Certificate ref is available");
+      
+      // Temporarily make the certificate visible
+      const originalDisplay = certificateRef.current.style.display;
+      certificateRef.current.style.display = 'block';
+      
+      // Ensure all images are loaded
+      const images = certificateRef.current.getElementsByTagName('img');
+      Promise.all(Array.from(images).filter(img => !img.complete).map(img => new Promise(resolve => { img.onload = img.onerror = resolve; })))
+        .then(() => {
+          // Short delay to ensure rendering is complete
+          setTimeout(() => {
+            html2canvas(certificateRef.current).then((canvas) => {
+              console.log("Canvas created");
+              const link = document.createElement('a');
+              link.download = 'usercentrics-app-sdk-certificate.png';
+              link.href = canvas.toDataURL();
+              console.log("Data URL created");
+              link.click();
+              
+              // Restore original display style
+              certificateRef.current.style.display = originalDisplay;
+            }).catch(error => console.error("html2canvas error:", error));
+          }, 100); // 100ms delay
+        });
+    } else {
+      console.log("Certificate ref is not available");
     }
-  }
+  };
 
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60)
