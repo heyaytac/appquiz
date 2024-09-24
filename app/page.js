@@ -145,29 +145,41 @@ export default function Page () {
     if (certificateRef.current) {
       console.log("Certificate ref is available");
       
-      // Temporarily make the certificate visible
+      // Temporarily make the certificate visible if it's hidden
       const originalDisplay = certificateRef.current.style.display;
       certificateRef.current.style.display = 'block';
       
-      // Ensure all images are loaded
-      const images = certificateRef.current.getElementsByTagName('img');
-      Promise.all(Array.from(images).filter(img => !img.complete).map(img => new Promise(resolve => { img.onload = img.onerror = resolve; })))
-        .then(() => {
-          // Short delay to ensure rendering is complete
-          setTimeout(() => {
-            html2canvas(certificateRef.current).then((canvas) => {
-              console.log("Canvas created");
-              const link = document.createElement('a');
-              link.download = 'usercentrics-app-sdk-certificate.png';
-              link.href = canvas.toDataURL();
-              console.log("Data URL created");
-              link.click();
-              
-              // Restore original display style
-              certificateRef.current.style.display = originalDisplay;
-            }).catch(error => console.error("html2canvas error:", error));
-          }, 100); // 100ms delay
-        });
+      html2canvas(certificateRef.current).then((canvas) => {
+        console.log("Canvas created");
+        
+        // Convert canvas to blob
+        canvas.toBlob((blob) => {
+          // Create object URL
+          const url = URL.createObjectURL(blob);
+          
+          // Open new window with the image
+          const newWindow = window.open(url, '_blank');
+          
+          if (newWindow) {
+            newWindow.document.title = 'Usercentrics App SDK Certificate';
+            newWindow.document.body.innerHTML = `
+              <div style="text-align: center;">
+                <img src="${url}" alt="Certificate" style="max-width: 100%; height: auto;" />
+                <p>If the download doesn't start automatically, right-click the image and select "Save image as..."</p>
+              </div>
+            `;
+          } else {
+            console.log("Popup blocked, falling back to current window");
+            window.location.href = url;
+          }
+          
+          // Cleanup
+          URL.revokeObjectURL(url);
+        }, 'image/png');
+        
+        // Restore original display style
+        certificateRef.current.style.display = originalDisplay;
+      }).catch(error => console.error("html2canvas error:", error));
     } else {
       console.log("Certificate ref is not available");
     }
