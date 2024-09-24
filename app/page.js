@@ -32,28 +32,38 @@ const questions = [
     correctAnswer: 2
   },
   {
-    question: "What's the recommended way to initialize our SDK in an app?",
+    question: "What is the way to initialize our SDK in an app?",
     options: [
-      "Usercentrics.configure()",
+      "UsercentricsCore.configure()",
       "SDKApp.start()",
       "InitializeSDK()",
       "Usercentrics.initialize()"
     ],
-    correctAnswer: 3
+    correctAnswer: 0
   },
   {
     question: "Which of these is NOT a feature of our App SDK?",
     options: [
-      "Consent Management",
-      "Data Encryption",
+      "Google Consent Mode",
+      "Consent Mediation",
       "Time Travel",
-      "Compliance Reporting"
+      "Custom UI"
     ],
     correctAnswer: 2
   },
   {
     question: "What's the maximum number of consent purposes our SDK supports?",
     options: ["10", "50", "100", "Unlimited"],
+    correctAnswer: 3
+  },
+  {
+    question: "What's the newest SDK Version?",
+    options: ["2.18", "2.15", "2.17", "2.16"],
+    correctAnswer: 2
+  },
+  {
+    question: "Which of the following is NOT a supported SDK for consent mediation in the App SDK?",
+    options: ["ironSource", "Crashlytics", "Chartboost", "Facebook SDK"],
     correctAnswer: 3
   }
 ]
