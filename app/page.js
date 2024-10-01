@@ -9,10 +9,10 @@ import Image from "next/image"
 import html2canvas from 'html2canvas'
 
 const characters = [
-  { name: "Privacy Pro", image: "/placeholder.svg?height=100&width=100", description: "Master of data protection" },
-  { name: "Consent Champion", image: "/placeholder.svg?height=100&width=100", description: "Expert in user permissions" },
-  { name: "Compliance Crusader", image: "/placeholder.svg?height=100&width=100", description: "Guardian of regulations" },
-  { name: "Data Detective", image: "/placeholder.svg?height=100&width=100", description: "Sleuth of information flows" },
+  { name: "Privacy Pro", image: "/image/uc_two.png", description: "Master of data protection" },
+  { name: "Consent Champion", image: "/image/uc_one.png", description: "Expert in user permissions" },
+  { name: "Compliance Crusader", image: "/image/uc_three.png", description: "Guardian of regulations" },
+  { name: "Data Detective", image: "/image/uc_four.png", description: "Sleuth of information flows" },
 ]
 
 const questions = [
@@ -52,13 +52,13 @@ const questions = [
     correctAnswer: 2
   },
   {
-    question: "What's the maximum number of consent purposes our SDK supports?",
-    options: ["10", "50", "100", "Unlimited"],
+    question: "Which option is not choosable on our UC UI?",
+    options: ["Sheet", "Full", "Pop-Up Center", "Upper"],
     correctAnswer: 3
   },
   {
     question: "What's the newest SDK Version?",
-    options: ["2.18", "2.15", "2.17", "2.16"],
+    options: ["2.18.1", "2.15.1", "2.17.1", "2.16.1"],
     correctAnswer: 2
   },
   {
