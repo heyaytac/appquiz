@@ -195,10 +195,15 @@ export default function Page () {
     <div className="bg-black min-h-screen text-white font-sans p-4">
       <header className="flex justify-between items-center mb-8">
         <div className="flex items-center">
-          <svg viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8 mr-2">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
-          </svg>
-          <span className="font-bold text-xl">USERCENTRICS</span>
+        <a href="https://usercentrics.com" target="_blank" rel="noopener noreferrer" className="flex items-center">
+          <Image
+            src="/image/usercentrics_logo.jpeg"  // Update this path to match your image file name
+            alt="Usercentrics Logo"
+            width={50}  // Adjust these dimensions as needed
+            height={60}  // to match your logo's aspect ratio
+            priority
+          />
+        </a>
         </div>
       </header>
       
